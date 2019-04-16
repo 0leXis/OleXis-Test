@@ -103,14 +103,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(399, 112);
+            this.ControlBox = false;
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonChoose);
             this.Controls.Add(this.textBoxClass);
             this.Controls.Add(this.textBoxFIO);
             this.Controls.Add(this.labelClass);
             this.Controls.Add(this.labelFIO);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "StudentData";
             this.Text = "OleXis Test: Ввод данных студента";
+            this.Load += new System.EventHandler(this.StudentData_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

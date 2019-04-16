@@ -153,6 +153,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(484, 15);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(139, 139);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -198,11 +199,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(651, 383);
+            this.ControlBox = false;
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.buttonNextQuestion);
             this.Controls.Add(this.buttonStopTest);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBoxQuestion);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Passing";
             this.Text = "OleXis Test: Прохождение";
             this.groupBox2.ResumeLayout(false);

@@ -82,10 +82,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(286, 164);
+            this.ControlBox = false;
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonBD);
             this.Controls.Add(this.buttonSozdanie);
             this.Controls.Add(this.buttonPassing);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Menu";
             this.Text = "OleXis Test: Меню";
             this.ResumeLayout(false);

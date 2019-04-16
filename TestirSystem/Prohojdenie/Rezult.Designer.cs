@@ -119,6 +119,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 173);
+            this.ControlBox = false;
             this.Controls.Add(this.button2);
             this.Controls.Add(this.labelClass);
             this.Controls.Add(this.labelFIO);
@@ -126,6 +127,7 @@
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.labelProcPrav);
             this.Controls.Add(this.labelOcenka);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Rezult";
             this.Text = "OleXis Test: Результат";
             this.ResumeLayout(false);

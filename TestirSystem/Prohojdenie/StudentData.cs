@@ -127,5 +127,11 @@ namespace TestirSystem
             if (!(char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == '\b'))
                 e.Handled = true;
         }
+
+        private void StudentData_Load(object sender, EventArgs e)
+        {
+            textBoxFIO.Clear();
+            textBoxClass.Clear();
+        }
     }
 }

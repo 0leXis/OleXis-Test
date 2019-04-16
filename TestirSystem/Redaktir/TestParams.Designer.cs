@@ -203,6 +203,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 394);
+            this.ControlBox = false;
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxPassword);
@@ -212,6 +213,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBoxTime);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "TestParams";
             this.Text = "OleXis Test: Параметры теста";
             this.groupBox1.ResumeLayout(false);

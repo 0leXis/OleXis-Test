@@ -42,7 +42,7 @@
             this.параметрыТестаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonCreateVopr = new System.Windows.Forms.Button();
             this.buttonDeleteSection = new System.Windows.Forms.Button();
-            this.listBoxQuestionsISections = new System.Windows.Forms.ListBox();
+            this.listBoxQuestionsAndSections = new System.Windows.Forms.ListBox();
             this.buttonChangeVopr = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -89,14 +89,14 @@
             // создатьToolStripMenuItem
             // 
             this.создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
-            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.создатьToolStripMenuItem.Text = "Создать тест";
             this.создатьToolStripMenuItem.Click += new System.EventHandler(this.создатьToolStripMenuItem_Click);
             // 
             // загрузитьToolStripMenuItem
             // 
             this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.загрузитьToolStripMenuItem.Text = "Загрузить тест";
             this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
             // 
@@ -104,14 +104,14 @@
             // 
             this.сохранитьТестToolStripMenuItem.Enabled = false;
             this.сохранитьТестToolStripMenuItem.Name = "сохранитьТестToolStripMenuItem";
-            this.сохранитьТестToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьТестToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.сохранитьТестToolStripMenuItem.Text = "Сохранить тест";
             this.сохранитьТестToolStripMenuItem.Click += new System.EventHandler(this.сохранитьТестToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
@@ -179,16 +179,16 @@
             this.buttonDeleteSection.UseVisualStyleBackColor = true;
             this.buttonDeleteSection.Click += new System.EventHandler(this.buttonDeleteSection_Click);
             // 
-            // listBoxQuestionsISections
+            // listBoxQuestionsAndSections
             // 
-            this.listBoxQuestionsISections.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxQuestionsISections.FormattingEnabled = true;
-            this.listBoxQuestionsISections.ItemHeight = 23;
-            this.listBoxQuestionsISections.Location = new System.Drawing.Point(12, 27);
-            this.listBoxQuestionsISections.Name = "listBoxQuestionsISections";
-            this.listBoxQuestionsISections.Size = new System.Drawing.Size(155, 280);
-            this.listBoxQuestionsISections.TabIndex = 16;
-            this.listBoxQuestionsISections.SelectedIndexChanged += new System.EventHandler(this.listBoxQuestionsISections_SelectedIndexChanged);
+            this.listBoxQuestionsAndSections.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxQuestionsAndSections.FormattingEnabled = true;
+            this.listBoxQuestionsAndSections.ItemHeight = 23;
+            this.listBoxQuestionsAndSections.Location = new System.Drawing.Point(12, 27);
+            this.listBoxQuestionsAndSections.Name = "listBoxQuestionsAndSections";
+            this.listBoxQuestionsAndSections.Size = new System.Drawing.Size(155, 280);
+            this.listBoxQuestionsAndSections.TabIndex = 16;
+            this.listBoxQuestionsAndSections.SelectedIndexChanged += new System.EventHandler(this.listBoxQuestionsISections_SelectedIndexChanged);
             // 
             // buttonChangeVopr
             // 
@@ -298,9 +298,10 @@
             // pictureBox1
             // 
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(484, 15);
+            this.pictureBox1.Location = new System.Drawing.Point(486, 15);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(139, 139);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -333,18 +334,19 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 406);
+            this.ControlBox = false;
             this.Controls.Add(this.buttonCreateSection);
             this.Controls.Add(this.buttonDeleteVopr);
             this.Controls.Add(this.buttonCreateVopr);
             this.Controls.Add(this.buttonDeleteSection);
-            this.Controls.Add(this.listBoxQuestionsISections);
+            this.Controls.Add(this.listBoxQuestionsAndSections);
             this.Controls.Add(this.buttonChangeVopr);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Editing";
             this.Text = "OleXis Test: Редактор тестов";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Editing_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -374,7 +376,7 @@
         private System.Windows.Forms.ToolStripMenuItem параметрыТестаToolStripMenuItem;
         private System.Windows.Forms.Button buttonCreateVopr;
         private System.Windows.Forms.Button buttonDeleteSection;
-        private System.Windows.Forms.ListBox listBoxQuestionsISections;
+        private System.Windows.Forms.ListBox listBoxQuestionsAndSections;
         private System.Windows.Forms.Button buttonChangeVopr;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;

@@ -33,5 +33,10 @@ namespace TestirSystem
             else
                 MessageBox.Show("Раздел или вопрос с таким именем уже существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        private void SectionName_Load(object sender, EventArgs e)
+        {
+            textBox1.Clear();
+        }
     }
 }

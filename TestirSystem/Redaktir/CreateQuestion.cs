@@ -47,6 +47,9 @@ namespace TestirSystem
             buttonPlaySound.Enabled = false;
 
             IsRedaktState = false;
+            //Очистка variants
+            Program.variants.QuestionType = QuestionType.AlternativeChoose;
+            Program.variants.QuestionType = QuestionType.SingleChoose;
         }
 
         public void SetVopros(Test test, Question Questionos)
@@ -100,8 +103,12 @@ namespace TestirSystem
                 buttonPlaySound.Enabled = true;
             }
 
-            Program.Variants.QuestionType = Questionos.Question_Type;
-            Program.Variants.SetVariants(Questionos.Variants, Questionos.Answers);
+            //Очистка variants
+            Program.variants.QuestionType = QuestionType.AlternativeChoose;
+            Program.variants.QuestionType = QuestionType.SingleChoose;
+            //Установка типа вопроса
+            Program.variants.QuestionType = Questionos.Question_Type;
+            Program.variants.SetVariants(Questionos.Variants, Questionos.Answers);
 
             Variants = Questionos.Variants;
             Answers = Questionos.Answers;
@@ -112,19 +119,19 @@ namespace TestirSystem
         private void buttonRedaktVariants_Click(object sender, EventArgs e)
         {
             if (comboBoxType.Text == comboBoxType.Items[0].ToString())
-                Program.Variants.QuestionType = QuestionType.SingleChoose;
+                Program.variants.QuestionType = QuestionType.SingleChoose;
             else if (comboBoxType.Text == comboBoxType.Items[1].ToString())
-                Program.Variants.QuestionType = QuestionType.AlternativeChoose;
+                Program.variants.QuestionType = QuestionType.AlternativeChoose;
             else if (comboBoxType.Text == comboBoxType.Items[2].ToString())
-                Program.Variants.QuestionType = QuestionType.AccordanceEstablishment;
+                Program.variants.QuestionType = QuestionType.AccordanceEstablishment;
             else if (comboBoxType.Text == comboBoxType.Items[3].ToString())
-                Program.Variants.QuestionType = QuestionType.SequenceEstablishment;
+                Program.variants.QuestionType = QuestionType.SequenceEstablishment;
             else if (comboBoxType.Text == comboBoxType.Items[4].ToString())
-                Program.Variants.QuestionType = QuestionType.FreeStatement;
+                Program.variants.QuestionType = QuestionType.FreeStatement;
             else if (comboBoxType.Text == comboBoxType.Items[5].ToString())
-                Program.Variants.QuestionType = QuestionType.MultiChoose;
+                Program.variants.QuestionType = QuestionType.MultiChoose;
 
-            Program.Variants.ShowDialog();
+            Program.variants.ShowDialog();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -147,7 +154,7 @@ namespace TestirSystem
             }
 
             var flag = true;
-            switch (Program.Variants.QuestionType)
+            switch (Program.variants.QuestionType)
             {
                 case QuestionType.SingleChoose:
                     if (Answers == null || Variants == null || Answers.Count == 0 || Variants.Count < 2)
@@ -184,7 +191,7 @@ namespace TestirSystem
                     sectionName = "NONE";
                 else
                     sectionName = comboBoxSection.Text;
-                if (!Program.editing.ChangeVopros(textBoxName.Text, Program.Variants.QuestionType, textBoxText.Text, Variants, Answers, sectionName, Image, SoundFileExt, SoundFile))
+                if (!Program.editing.ChangeVopros(textBoxName.Text, Program.variants.QuestionType, textBoxText.Text, Variants, Answers, sectionName, Image, SoundFileExt, SoundFile))
                     MessageBox.Show("Раздел или вопрос с таким именем уже существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                     Hide();
@@ -196,7 +203,7 @@ namespace TestirSystem
                     sectionName = "NONE";
                 else
                     sectionName = comboBoxSection.Text;
-                if (!Program.editing.CreateQuestion(textBoxName.Text, Program.Variants.QuestionType, textBoxText.Text, Variants, Answers, sectionName, Image, SoundFileExt, SoundFile))
+                if (!Program.editing.CreateQuestion(textBoxName.Text, Program.variants.QuestionType, textBoxText.Text, Variants, Answers, sectionName, Image, SoundFileExt, SoundFile))
                     MessageBox.Show("Раздел или вопрос с таким именем уже существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                     Hide();

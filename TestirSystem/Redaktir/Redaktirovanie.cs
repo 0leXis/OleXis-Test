@@ -29,8 +29,25 @@ namespace TestirSystem
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (TestForRedakt != null)
+                if (MessageBox.Show("Вы уверены?" + Environment.NewLine + "Все несохраненные данные текущего теста будут потеряны", "Выход", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            TestForRedakt = null;
+            listBoxQuestionsAndSections.Items.Clear();
+            listBoxQuestionsAndSections.SelectedIndex = -1;
+            listBoxQuestionsISections_SelectedIndexChanged(listBoxQuestionsAndSections, new EventArgs());
+            DisableButtons();
             Hide();
             Program.menu.Show();
+        }
+
+        private void DisableButtons()
+        {
+            тестToolStripMenuItem.Enabled = false;
+            сохранитьТестToolStripMenuItem.Enabled = false;
+            buttonCreateSection.Enabled = false;
+            buttonCreateVopr.Enabled = false;
+            buttonPlaySound.Enabled = false;
         }
 
         private void EnableButtons()
@@ -49,16 +66,11 @@ namespace TestirSystem
                     return;
             EnableButtons();
             TestForRedakt = new Test();
-            listBoxQuestionsISections.Items.Clear();
-            listBoxQuestionsISections.Items.Add("Без раздела");
+            listBoxQuestionsAndSections.Items.Clear();
+            listBoxQuestionsAndSections.Items.Add("Без раздела");
             Program.testParams.GetInfoFromTest(TestForRedakt);
 
             Text = "OleXis Test: Редактор тестов - Безимянный.test";
-        }
-
-        private void Editing_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Program.menu.Show();
         }
 
         private void параметрыТестаToolStripMenuItem_Click(object sender, EventArgs e)
@@ -83,7 +95,7 @@ namespace TestirSystem
             else
             {
                 TestForRedakt.Sections.Add(Name);
-                listBoxQuestionsISections.Items.Add(Name);
+                listBoxQuestionsAndSections.Items.Add(Name);
                 return true;
             }
         }
@@ -97,35 +109,35 @@ namespace TestirSystem
                 TestForRedakt.Questions.Add(new Question(Name, Question_Type, Text, Variants, Answers, Section, Image, SoundFileExt, FileSound));
                 var flag = false;
                 var index = 0;
-                for (var i = 0; i < listBoxQuestionsISections.Items.Count; i++)
+                for (var i = 0; i < listBoxQuestionsAndSections.Items.Count; i++)
                     if (!flag)
                     {
                         if (Section == "NONE")
                             flag = true;
                         else
-                        if (listBoxQuestionsISections.Items[i].ToString() == Section)
+                        if (listBoxQuestionsAndSections.Items[i].ToString() == Section)
                             flag = true;
                     }
                     else
-                        if (listBoxQuestionsISections.Items[i].ToString().Substring(0, 2) != "  ")
+                        if (listBoxQuestionsAndSections.Items[i].ToString().Substring(0, 2) != "  ")
                         {
                             index = i;
                             break;
                         }
-                if(listBoxQuestionsISections.Items.Count == 1)
+                if(listBoxQuestionsAndSections.Items.Count == 1)
                     index++;
                 if(index == 0)
-                    listBoxQuestionsISections.Items.Add("  " + Name);
+                    listBoxQuestionsAndSections.Items.Add("  " + Name);
                 else
-                    listBoxQuestionsISections.Items.Insert(index, "  " + Name);
+                    listBoxQuestionsAndSections.Items.Insert(index, "  " + Name);
                 return true;
             }
         }
 
         public bool ChangeVopros(string Name, QuestionType Question_Type, string Text, List<string> Variants, List<int> Answers, string Section = "NONE", Bitmap Image = null, string SoundFileExt = null, byte[] FileSound = null)
         {
-            TestForRedakt.Questions.RemoveAt(TestForRedakt.Questions.FindIndex(x => "  " + x.Name == listBoxQuestionsISections.Items[listBoxQuestionsISections.SelectedIndex].ToString()));
-            listBoxQuestionsISections.Items.RemoveAt(listBoxQuestionsISections.SelectedIndex);
+            TestForRedakt.Questions.RemoveAt(TestForRedakt.Questions.FindIndex(x => "  " + x.Name == listBoxQuestionsAndSections.Items[listBoxQuestionsAndSections.SelectedIndex].ToString()));
+            listBoxQuestionsAndSections.Items.RemoveAt(listBoxQuestionsAndSections.SelectedIndex);
             if (TestForRedakt.Questions.FindIndex(x => x.Name == Name) != -1 || TestForRedakt.Sections.FindIndex(x => x == Name) != -1)
                 return false;
             else
@@ -133,27 +145,27 @@ namespace TestirSystem
                 TestForRedakt.Questions.Add(new Question(Name, Question_Type, Text, Variants, Answers, Section, Image, SoundFileExt, FileSound));
                 var flag = false;
                 var index = 0;
-                for (var i = 0; i < listBoxQuestionsISections.Items.Count; i++)
+                for (var i = 0; i < listBoxQuestionsAndSections.Items.Count; i++)
                     if (!flag)
                     {
                         if (Section == "NONE")
                             flag = true;
                         else
-                        if (listBoxQuestionsISections.Items[i].ToString() == Section)
+                        if (listBoxQuestionsAndSections.Items[i].ToString() == Section)
                             flag = true;
                     }
                     else
-                        if (listBoxQuestionsISections.Items[i].ToString().Substring(0, 2) != "  ")
+                        if (listBoxQuestionsAndSections.Items[i].ToString().Substring(0, 2) != "  ")
                     {
                         index = i;
                         break;
                     }
-                if (listBoxQuestionsISections.Items.Count == 1)
+                if (listBoxQuestionsAndSections.Items.Count == 1)
                     index++;
                 if (index == 0)
-                    listBoxQuestionsISections.Items.Add("  " + Name);
+                    listBoxQuestionsAndSections.Items.Add("  " + Name);
                 else
-                    listBoxQuestionsISections.Items.Insert(index, "  " + Name);
+                    listBoxQuestionsAndSections.Items.Insert(index, "  " + Name);
                 return true;
             }
         }
@@ -175,20 +187,20 @@ namespace TestirSystem
             pictureBox1.Image = null;
             labelVoprText.Text = "Текст вопроса";
 
-            if (listBoxQuestionsISections.SelectedIndex != 0)
+            if (listBoxQuestionsAndSections.SelectedIndex != 0)
             {
                 buttonDeleteSection.Enabled = false;
                 buttonDeleteVopr.Enabled = false;
                 buttonChangeVopr.Enabled = false;
-                if(listBoxQuestionsISections.SelectedIndex != -1)
+                if(listBoxQuestionsAndSections.SelectedIndex != -1)
                 {
-                    if (TestForRedakt.Sections.Contains(listBoxQuestionsISections.SelectedItem))
+                    if (TestForRedakt.Sections.Contains(listBoxQuestionsAndSections.SelectedItem))
                     {
                         buttonDeleteSection.Enabled = true;
                     }
                     else
                     {
-                        var Vopr = TestForRedakt.Questions.Find(x => "  " + x.Name == listBoxQuestionsISections.SelectedItem.ToString());
+                        var Vopr = TestForRedakt.Questions.Find(x => "  " + x.Name == listBoxQuestionsAndSections.SelectedItem.ToString());
                         labelVoprText.Text = Vopr.Text;
                         pictureBox1.Image = Vopr.Image;
                         if (Vopr.SoundFileExt != null)
@@ -301,14 +313,14 @@ namespace TestirSystem
             if (MessageBox.Show("Вы уверены?", "Удаление раздела", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 for (var i = 0; i < TestForRedakt.Questions.Count; i++)
-                    if (TestForRedakt.Questions[i].Section == listBoxQuestionsISections.SelectedItem.ToString())
+                    if (TestForRedakt.Questions[i].Section == listBoxQuestionsAndSections.SelectedItem.ToString())
                     {
-                        listBoxQuestionsISections.Items.Remove("  " + TestForRedakt.Questions[i].Name);
+                        listBoxQuestionsAndSections.Items.Remove("  " + TestForRedakt.Questions[i].Name);
                         TestForRedakt.Questions.RemoveAt(i);
                         i--;
                     }
-                TestForRedakt.Sections.Remove(listBoxQuestionsISections.SelectedItem.ToString());
-                listBoxQuestionsISections.Items.Remove(listBoxQuestionsISections.SelectedItem);
+                TestForRedakt.Sections.Remove(listBoxQuestionsAndSections.SelectedItem.ToString());
+                listBoxQuestionsAndSections.Items.Remove(listBoxQuestionsAndSections.SelectedItem);
             }
         }
 
@@ -322,15 +334,15 @@ namespace TestirSystem
         {
             if(MessageBox.Show("Вы уверены?", "Удаление вопроса", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                var i = TestForRedakt.Questions.FindIndex(x => "  " + x.Name == listBoxQuestionsISections.SelectedItem.ToString());
-                listBoxQuestionsISections.Items.RemoveAt(listBoxQuestionsISections.SelectedIndex);
+                var i = TestForRedakt.Questions.FindIndex(x => "  " + x.Name == listBoxQuestionsAndSections.SelectedItem.ToString());
+                listBoxQuestionsAndSections.Items.RemoveAt(listBoxQuestionsAndSections.SelectedIndex);
                 TestForRedakt.Questions.RemoveAt(i);
             }
         }
 
         private void buttonChangeVopr_Click(object sender, EventArgs e)
         {
-            Program.createQuestion.SetVopros(TestForRedakt, TestForRedakt.Questions[TestForRedakt.Questions.FindIndex(x => "  " + x.Name == listBoxQuestionsISections.SelectedItem.ToString())]);
+            Program.createQuestion.SetVopros(TestForRedakt, TestForRedakt.Questions[TestForRedakt.Questions.FindIndex(x => "  " + x.Name == listBoxQuestionsAndSections.SelectedItem.ToString())]);
             Program.createQuestion.ShowDialog();
         }
 
@@ -368,7 +380,7 @@ namespace TestirSystem
 
         private void buttonPlaySound_Click(object sender, EventArgs e)
         {
-            var Question = TestForRedakt.Questions.Find(x => "  " + x.Name == listBoxQuestionsISections.SelectedItem.ToString());
+            var Question = TestForRedakt.Questions.Find(x => "  " + x.Name == listBoxQuestionsAndSections.SelectedItem.ToString());
             Program.PlaySound(Question.SoundFile, Question.SoundFileExt);
         }
 
@@ -422,38 +434,38 @@ namespace TestirSystem
                         File.Delete(fil);
                     Directory.Delete("tmp");
 
-                    listBoxQuestionsISections.Items.Clear();
-                    listBoxQuestionsISections.Items.Add("Без раздела");
+                    listBoxQuestionsAndSections.Items.Clear();
+                    listBoxQuestionsAndSections.Items.Add("Без раздела");
                     Program.testParams.GetInfoFromTest(TestForRedakt);
 
                     foreach(var Section in TestForRedakt.Sections)
-                        listBoxQuestionsISections.Items.Add(Section);
+                        listBoxQuestionsAndSections.Items.Add(Section);
 
                     foreach(var Questionos in TestForRedakt.Questions)
                     {
                         var flag = false;
                         var index = 0;
-                        for (var i = 0; i < listBoxQuestionsISections.Items.Count; i++)
+                        for (var i = 0; i < listBoxQuestionsAndSections.Items.Count; i++)
                             if (!flag)
                             {
                                 if (Questionos.Section == "NONE")
                                     flag = true;
                                 else
-                                if (listBoxQuestionsISections.Items[i].ToString() == Questionos.Section)
+                                if (listBoxQuestionsAndSections.Items[i].ToString() == Questionos.Section)
                                     flag = true;
                             }
                             else
-                            if (listBoxQuestionsISections.Items[i].ToString().Substring(0, 2) != "  ")
+                            if (listBoxQuestionsAndSections.Items[i].ToString().Substring(0, 2) != "  ")
                             {
                                 index = i;
                                 break;
                             }
-                        if (listBoxQuestionsISections.Items.Count == 1)
+                        if (listBoxQuestionsAndSections.Items.Count == 1)
                             index++;
                         if (index == 0)
-                            listBoxQuestionsISections.Items.Add("  " + Questionos.Name);
+                            listBoxQuestionsAndSections.Items.Add("  " + Questionos.Name);
                         else
-                            listBoxQuestionsISections.Items.Insert(index, "  " + Questionos.Name);
+                            listBoxQuestionsAndSections.Items.Insert(index, "  " + Questionos.Name);
                     }
                     EnableButtons();
 

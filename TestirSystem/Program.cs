@@ -15,7 +15,7 @@ namespace TestirSystem
         public static TestParams testParams;
         public static SectionName sectionName;
         public static CreateQuestion createQuestion;
-        public static Variants Variants;
+        public static Variants variants;
 
         public static Passing passing;
         public static Rezult rezult;
@@ -44,7 +44,7 @@ namespace TestirSystem
             testParams = new TestParams();
             sectionName = new SectionName();
             createQuestion = new CreateQuestion();
-            Variants = new Variants();
+            variants = new Variants();
             passing = new Passing();
             rezult = new Rezult();
             studentData = new StudentData();

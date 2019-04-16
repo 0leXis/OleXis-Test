@@ -139,10 +139,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 260);
+            this.ControlBox = false;
             this.Controls.Add(this.buttonAddVariant);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Variants";
             this.Text = "OleXis Test: Ввод вариантов ответа";
             this.groupBox1.ResumeLayout(false);
