@@ -54,6 +54,7 @@
             this.buttonBD.TabIndex = 6;
             this.buttonBD.Text = "Просмотреть БД ответов";
             this.buttonBD.UseVisualStyleBackColor = true;
+            this.buttonBD.Click += new System.EventHandler(this.buttonBD_Click);
             // 
             // buttonSozdanie
             // 

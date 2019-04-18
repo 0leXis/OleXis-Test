@@ -78,6 +78,8 @@ namespace TestirSystem
             }
         }
 
+        public string DBConnection { get; set; }
+
         public TestParams()
         {
             InitializeComponent();
@@ -93,6 +95,7 @@ namespace TestirSystem
             else
                 QuestionsToGenerate = 1;
             Password = test.Password;
+            DBConnection = test.DBConnectionRequest;
         }
         //Сохранить данные в тест
         public void SetInfoToTest(Test test)
@@ -104,6 +107,7 @@ namespace TestirSystem
             else
                 test.CountForGenerate = 1;
             test.Password = Password;
+            test.DBConnectionRequest = DBConnection;
         }
         //Отмена
         private void button1_Click(object sender, EventArgs e)
@@ -125,6 +129,15 @@ namespace TestirSystem
             for(var i = 0; i < 10; i++)
             {
                 textBoxPassword.Text += Convert.ToChar(rndforPassword.Next(48, 90));
+            }
+        }
+
+        private void buttonBD_Click(object sender, EventArgs e)
+        {
+            Program.dbConnection.DBconnstr = DBConnection;
+            if (Program.dbConnection.ShowDialog() == DialogResult.OK)
+            {
+                DBConnection = Program.dbConnection.DBconnstr;
             }
         }
     }

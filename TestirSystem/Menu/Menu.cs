@@ -28,5 +28,11 @@ namespace TestirSystem
         {
             Program.studentData.ShowDialog();
         }
+
+        private void buttonBD_Click(object sender, EventArgs e)
+        {
+            Program.dbShow.Show();
+            Hide();
+        }
     }
 }

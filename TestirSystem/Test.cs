@@ -157,10 +157,14 @@ namespace TestirSystem
 
             if(Password != "")
             {
+                if (File.Exists(Path))
+                    File.Delete(Path);
                 EncryptDecryptFile(TmpPath + @"\testtmp.test", Password, true, Path);
             }
             else
             {
+                if (File.Exists(Path))
+                    File.Delete(Path);
                 File.Copy(TmpPath + @"\testtmp.test", Path);
             }
         }

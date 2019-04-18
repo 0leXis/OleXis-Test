@@ -23,6 +23,11 @@ namespace TestirSystem
         public static AnswerList answerList;
 
         public static PasswordDialog passwordDialog;
+        public static DBConnection dbConnection;
+        public static DBShow dbShow;
+        public static DBStatistics dbStatistics;
+        //Предоставляет доступ к БД
+        public static DBProcessor dbProcessor;
         //Предоставляет звуковую подсистему
         static MediaPlayer Player;
         //Имя временного файла для звуков
@@ -50,9 +55,15 @@ namespace TestirSystem
             studentData = new StudentData();
             answerList = new AnswerList();
             passwordDialog = new PasswordDialog();
+            dbConnection = new DBConnection();
+            dbShow = new DBShow();
+            dbStatistics = new DBStatistics();
 
+            dbProcessor = new DBProcessor("");
             Application.Run(menu);
 
+            if (dbProcessor != null)
+                dbProcessor.CloseConnection();
             if (PlayingAudioTmp != null && File.Exists(PlayingAudioTmp))
                 File.Delete(PlayingAudioTmp);
         }

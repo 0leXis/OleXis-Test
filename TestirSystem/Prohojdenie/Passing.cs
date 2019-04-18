@@ -336,6 +336,35 @@ namespace TestirSystem
             var ocenka = (int)Math.Round(10 - (double)Answers.Count(x => x == false) * Answers.Count / 10);
             Program.rezult.SetResult(ocenka, Answers.Count(x => x == true), Answers.Count, FullName, Group, Minutes, Seconds, TimeForTest);
             Program.rezult.ShowDialog();
+
+            if(DBConnection != "")
+            {
+                var flag = false;
+                Program.dbProcessor = new DBProcessor(DBConnection);
+                var Error = "";
+                if (Program.dbProcessor.OpenConnection(ref Error))
+                {
+                    if (Program.dbProcessor.CreateTestTable(ref Error))
+                    {
+                        if(!Program.dbProcessor.InsertItem(FullName, Group, ocenka, ref Error))
+                            flag = true;
+                    }
+                    else
+                    {
+                        flag = true;
+                    }
+                }
+                else
+                {
+                    flag = true;
+                }
+                if (flag)
+                    MessageBox.Show("Ошибка при записи в БД!" + Environment.NewLine + Error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show("Данные успешно добавлены в БД", "БД", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Program.dbProcessor.CloseConnection();
+            }
+
             Hide();
             Program.menu.Show();
         }

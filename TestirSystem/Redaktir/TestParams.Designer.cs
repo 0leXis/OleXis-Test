@@ -54,6 +54,7 @@
             this.buttonBD.TabIndex = 19;
             this.buttonBD.Text = "Связать с БД ответов";
             this.buttonBD.UseVisualStyleBackColor = true;
+            this.buttonBD.Click += new System.EventHandler(this.buttonBD_Click);
             // 
             // buttonCancel
             // 
