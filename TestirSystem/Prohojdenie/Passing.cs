@@ -333,7 +333,7 @@ namespace TestirSystem
         public void ShowResults()
         {
             timer.Stop();
-            var ocenka = (int)Math.Round(10 - (double)Answers.Count(x => x == false) * Answers.Count / 10);
+            var ocenka = (int)Math.Round((double)Answers.Count(x => x == true) / Answers.Count * 10);
             Program.rezult.SetResult(ocenka, Answers.Count(x => x == true), Answers.Count, FullName, Group, Minutes, Seconds, TimeForTest);
             Program.rezult.ShowDialog();
 
